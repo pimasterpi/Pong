@@ -6,8 +6,6 @@ import java.awt.event.KeyEvent;
 public class Pong implements Runnable {
     int upCount = 0;
     int downCount = 0;
-    int leftCount = 0;
-    int rightCount = 0;
 
 
     public static void main(String[] args) {
@@ -32,18 +30,10 @@ public class Pong implements Runnable {
         JLabel down = new JLabel() {{
             setText("Down: " + downCount);
         }};
-        JLabel left = new JLabel() {{
-            setText("Left: " + leftCount);
-        }};
-        JLabel right = new JLabel() {{
-            setText("Right: " + rightCount);
-        }};
 
         JPanel panel = new JPanel() {{
             add(up);
             add(down);
-            add(left);
-            add(right);
         }};
 
         frame.add(panel);
@@ -57,10 +47,8 @@ public class Pong implements Runnable {
             @Override
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
-                    case KeyEvent.VK_UP -> up.setText("Up: " + (++upCount));
-                    case KeyEvent.VK_DOWN -> down.setText("Down: " + (++downCount));
-                    case KeyEvent.VK_LEFT -> left.setText("Left: " + (++leftCount));
-                    case KeyEvent.VK_RIGHT -> right.setText("Right: " + (++rightCount));
+                    case KeyEvent.VK_UP, KeyEvent.VK_LEFT -> up.setText("Up: " + (++upCount));
+                    case KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT -> down.setText("Down: " + (++downCount));
                 }
             }
 
