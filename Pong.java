@@ -19,26 +19,34 @@ public class Pong implements Runnable {
     }
 
     public void run() {
-        JFrame frame = new JFrame("Pong");
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 400);
+        JFrame frame = new JFrame("Pong") {{
+            setVisible(true);
+            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            setSize(600, 400);
+        }};
 
-        JPanel panel = new JPanel();
-        JLabel up = new JLabel();
-        JLabel down = new JLabel();
-        JLabel left = new JLabel();
-        JLabel right = new JLabel();
 
-        panel.add(up);
-        panel.add(down);
-        panel.add(left);
-        panel.add(right);
+        JLabel up = new JLabel() {{
+            setText("Up: " + upCount);
+        }};
+        JLabel down = new JLabel() {{
+            setText("Down: " + downCount);
+        }};
+        JLabel left = new JLabel() {{
+            setText("Left: " + leftCount);
+        }};
+        JLabel right = new JLabel() {{
+            setText("Right: " + rightCount);
+        }};
 
-        up.setText("Up: " + upCount);
-        down.setText("Down: " + downCount);
-        left.setText("Left: " + leftCount);
-        right.setText("Right: " + rightCount);
+        JPanel panel = new JPanel() {{
+            add(up);
+            add(down);
+            add(left);
+            add(right);
+        }};
+
+        frame.add(panel);
 
         frame.addKeyListener(new KeyAdapter() {
             @Override
@@ -48,27 +56,19 @@ public class Pong implements Runnable {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    up.setText("Up: " + (++upCount));
-                }
-                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    down.setText("Down: " + (++downCount));
-                }
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    left.setText("Left: " + (++leftCount));
-                }
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    right.setText("Right: " + (++rightCount));
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP -> up.setText("Up: " + (++upCount));
+                    case KeyEvent.VK_DOWN -> down.setText("Down: " + (++downCount));
+                    case KeyEvent.VK_LEFT -> left.setText("Left: " + (++leftCount));
+                    case KeyEvent.VK_RIGHT -> right.setText("Right: " + (++rightCount));
                 }
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                super.keyReleased(e);
+
             }
         });
-
-        frame.add(panel);
 
     }
 }
