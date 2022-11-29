@@ -18,9 +18,10 @@ public class Pong implements Runnable {
 
     public void run() {
         JFrame frame = new JFrame("Pong") {{
-            setVisible(true);
             setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             setSize(600, 400);
+            setLocationRelativeTo(null);
+            setVisible(true);
         }};
 
 
